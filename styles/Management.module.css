@@ -1,0 +1,8 @@
+.managementContainer {
+    display: flex;
+    margin: 70px 60px;
+}
+
+.commandContainer {
+    margin-bottom: 10px;
+}

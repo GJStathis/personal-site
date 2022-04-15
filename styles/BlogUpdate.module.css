@@ -1,0 +1,23 @@
+.UpdateContainer {
+    display: flex
+}
+
+.row {
+    margin-right: 20px;
+}
+
+.formDiv {
+    margin-top: 20px;
+}
+
+.formColumnStyle {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.inputElement {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,6 @@
+.blogListContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 60px 200px;
+}
