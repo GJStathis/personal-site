@@ -2,7 +2,8 @@ import BlogCard from "../../components/blogCard"
 import styles from "../../styles/BlogList.module.css"
 import { useState, useEffect } from "react"
 import Link from 'next/link'
-import { getDateFromDateime, getAllBlogPosts } from "../../lib/utils"
+import { getDateFromDateime } from "../../lib/utils"
+import { getAllBlogPosts } from "../../lib/apiCalls"
 
 export default function Blog() {
 

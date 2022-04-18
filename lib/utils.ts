@@ -5,12 +5,6 @@ function getDateFromDateime(datetime: string) {
     return `${month}-${date}-${dateVal.getFullYear()}`
 }
 
-async function getAllBlogPosts(setPostsHandler: (data: object) => void) {
-    const response = await fetch('/api/posts')
-    const data = await response.json()
-    setPostsHandler(data)
-}
-
 function simpleErrorChecking(status, res) {
     if(status === 500) {
         res.send({"status": 500, "message": "blog failed to delete"})
@@ -19,4 +13,5 @@ function simpleErrorChecking(status, res) {
     }
 }
 
-export { getDateFromDateime, getAllBlogPosts, simpleErrorChecking }
+
+export { getDateFromDateime, simpleErrorChecking }

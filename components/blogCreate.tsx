@@ -25,6 +25,10 @@ function BlogCreate() {
             setFile(null)
             fileRef.current.value = ""
         })
+        .catch(err => {
+            e.preventDefault()
+            alert(err)
+        })
 
     }
 

@@ -2,16 +2,27 @@ import BlogCreate from '../components/blogCreate'
 import BlogUpdate from '../components/blogUpdate'
 import BlogDelete from '../components/blogDelete'
 import {useState, useEffect} from 'react'
-import { getAllBlogPosts } from "../lib/utils"
+import { getAllBlogPosts } from "../lib/apiCalls"
 import styles from "../styles/GlobalDesign.module.css"
 import managmentStyles from "../styles/Management.module.css"
+import { getSession, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
-function Management() {
+export default function Management() {
     const [operation, setOperation] = useState("")
     const [blogData, setBlogData] = useState(null)
+    const router = useRouter()
+
+    const { data: session, status } = useSession()
 
     useEffect( () => {
-        getAllBlogPosts(setBlogData)
+        if(!session || !session.user.isAdmin) {
+            router.push({
+                pathname: '/'
+            })
+        } else {
+            getAllBlogPosts(setBlogData)
+        }
     }, [])
     
     function removeObjectFromData(objectId) {
@@ -26,6 +37,7 @@ function Management() {
 
     return(
         <div className={managmentStyles.managementContainer}>
+            { session && session.user.isAdmin &&
             <div>
                 <div className={managmentStyles.commandContainer}>
                     <button className={styles.buttonGeneral} onClick={() => setOperation('create')}>Create</button>
@@ -37,9 +49,15 @@ function Management() {
                 { operation == "update" && blogData && <BlogUpdate data={blogData} />}
                 { operation == "delete" && blogData && <BlogDelete data={blogData} clientDelete={removeObjectFromData} />}
             </div>
-
+            }
         </div>
     )
 }
 
-export default Management
+export async function getServerSideProps(ctx) {
+    return {
+      props: {
+        session: await getSession(ctx)
+      }
+    }
+  }
