@@ -1,0 +1,21 @@
+.centerDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.projectContainer {
+    padding: 100px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border: 2px solid black;
+    width: 80vw;
+    height: 80vh;
+}
+
+.projectCard {
+    width: 200px;
+    margin-left: 10px;
+}
