@@ -22,4 +22,5 @@ adminUser.save(function(err) {
     }
 
     console.log("admin user created!")
+    return
 })

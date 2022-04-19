@@ -1,6 +1,7 @@
 import { update } from '../../../../../lib/database/blog'
 import { connectToDB } from '../../../../../lib/database/dbConnect'
 import { simpleErrorChecking } from '../../../../../lib/utils'
+import { getSession } from "next-auth/react"
 import multer from 'multer'
 import path from 'path'
 import fs from 'fs'
@@ -28,25 +29,31 @@ const upload = multer({
 })
 
 export default async function handler(req, res) {
-    connectToDB()
+    const session = await getSession({ req })
 
-    const { pid } = req.query
-    let status = null
+    if(session && session.user.isAdmin) {
+        connectToDB()
 
-    console.log(`Updating blog post from file`)
+        const { pid } = req.query
+        let status = null
 
-    upload.single('content')(req, res, async function(err) {
-        if(err) {
-            console.error(`ERROR: file failed to create: ${err}`)
-            res.send({"status": 500, "message": "file failed to upload"})
-        } else {
-            console.log('Creating new blog post...')
-            const fileContent = fs.readFileSync(req.file.path).toString()
-            const title = req.body.title
-            status = await update(pid, title, fileContent)
+        console.log(`Updating blog post from file`)
 
-        }
-    })
+        upload.single('content')(req, res, async function(err) {
+            if(err) {
+                console.error(`ERROR: file failed to create: ${err}`)
+                res.send({"status": 500, "message": "file failed to upload"})
+            } else {
+                console.log('Creating new blog post...')
+                const fileContent = fs.readFileSync(req.file.path).toString()
+                const title = req.body.title
+                status = await update(pid, title, fileContent)
 
-    simpleErrorChecking(status, res)
+            }
+        })
+
+        simpleErrorChecking(status, res)
+    } else {
+        res.send({error: "You do not have permissison to access this route"})
+    }
 }
