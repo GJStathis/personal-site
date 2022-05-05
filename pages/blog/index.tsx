@@ -22,8 +22,7 @@ export default function Blog() {
                     posts.map( (post, index) => {
                         return(
                             <Link href={`/blog/${post._id}`} key={index} passHref>
-                                <BlogCard>
-                                    <h3>{post.title}</h3>
+                                <BlogCard title={post.title}>
                                     <p>Published: {getDateFromDateime(post.publish_date)}</p>
                                 </BlogCard>
                             </Link>

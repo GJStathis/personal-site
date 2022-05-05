@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export default function Home() {
   return (
     <div className={styles.container}>
-      <Navbar />
       <div className={styles.contentContainer}>
         <div className={styles.contentTitle}>
           <h1 className={styles.title}>Nice to meet you my name is Greg</h1>
