@@ -5,3 +5,9 @@
 .postTitle {
     color: grey;
 }
+
+@media screen and (max-width: 800px) {
+    .postContainer {
+        margin: 50px;
+    }
+}
