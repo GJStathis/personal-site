@@ -1,4 +1,4 @@
-/* .navBar {
+.navBar {
     position: relative;
 }
 
@@ -12,31 +12,50 @@
 
 .navMenu {
     overflow-y: scroll;
-    list-style: none;
     position: fixed;
-    background: darkcyan;
     left: 0;
     height: 100vh;
-    width: 0;
-    overflow: hidden;
-    max-width: 290px;
+    max-width: 225px;
     z-index: 9;
     margin: 0;
 }
 
+.navClosed {
+    width: 0;
+    overflow: hidden;
+    transition: ease width 1s; 
+}
+
 .navOpen{
     width: 100%;
+    background: #FAF9F6;
+    transition: ease width .75s;
+}
+
+.navList {
+    list-style: none;
 }
 
 .navMenu a {
-    display: block;
-    padding: 10px 40px;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: bold;
 }
 
+.navMenu li {
+    padding: 10px 40px;
+}
+
 .navMenu li:first-child {
     margin-top: 3rem;
 }
- */
+
+@media screen and (min-width: 480px) {
+    .navBar {
+        display: none;
+    }
+}
+
+@keyframes open {
+    
+}

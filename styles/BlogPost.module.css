@@ -1,5 +1,5 @@
 .postContainer {
-    margin: 100px;
+    padding: 50px;
 }
 
 .postTitle {
@@ -12,8 +12,14 @@
     font-size: 22px;
 }
 
-@media screen and (max-width: 800px) {
-    .postContainer {
-        margin: 50px;
+@media screen and (max-width: 480px) {
+    .postTitle {
+        color: grey;
+        font-size: 38px;
+    }
+    
+    .textContentDiv {
+        white-space: pre-line;
+        font-size: 18px;
     }
 }
