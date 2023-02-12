@@ -11,7 +11,7 @@ function BlogDelete(props) {
 
         // Make a call to the api to delete the id
         if(selected) {
-            let url = `api/management/delete`
+            let url = `/api/management/delete`
             const headers = new Headers()
             headers.append('Content-Type', 'application/json')
 

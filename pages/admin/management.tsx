@@ -1,29 +1,15 @@
-import BlogCreate from '../components/blogCreate'
-import BlogUpdate from '../components/blogUpdate'
-import BlogDelete from '../components/blogDelete'
-import {useState, useEffect} from 'react'
-import { getAllBlogPosts } from "../lib/apiCalls"
-import styles from "../styles/GlobalDesign.module.css"
-import managmentStyles from "../styles/Management.module.css"
-import { getSession, useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
+import BlogCreate from '../../components/blogCreate'
+import BlogUpdate from '../../components/blogUpdate'
+import BlogDelete from '../../components/blogDelete'
+import {useState} from 'react'
+import styles from "../../styles/GlobalDesign.module.css"
+import managmentStyles from "../../styles/Management.module.css"
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "../api/auth/[...nextauth]"
 
-export default function Management() {
+export default function Management({ blogs, session }) {
     const [operation, setOperation] = useState("")
-    const [blogData, setBlogData] = useState(null)
-    const router = useRouter()
-
-    const { data: session, status } = useSession()
-
-    useEffect( () => {
-        if(!session || !session.user.isAdmin) {
-            router.push({
-                pathname: '/'
-            })
-        } else {
-            getAllBlogPosts(setBlogData)
-        }
-    }, [])
+    const [blogData, setBlogData] = useState(blogs)
     
     function removeObjectFromData(objectId) {
         const buf = blogData.filter(function hasObjId(obj) {
@@ -54,10 +40,26 @@ export default function Management() {
     )
 }
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps(context) {
+    const session = await getServerSession(context.req, context.res, authOptions)
+
+    if(session === null || session.user.isAdmin === false)
+    {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            }
+        }
+    }
+
+    const response = await fetch(`${process.env.API_URL}/api/posts`)
+    const data = await response.json()
+
     return {
       props: {
-        session: await getSession(ctx)
+        blogs: data,
+        session: session,
       }
     }
   }

@@ -7,9 +7,10 @@ function BlogCreate() {
     const [file, setFile] = useState("")
 
     const fileRef = useRef()
-    const url = "api/management/create"
+    const url = "/api/management/create"
 
     const submitForm = (e) => {
+        e.preventDefault()
         const formData = new FormData();
         formData.append("title", title)
         formData.append("content", file)
@@ -19,15 +20,16 @@ function BlogCreate() {
             credentials: 'include',
             body: formData
         })
-        .then(res => res.json())
+        .then(res => {res.json()})
         .then(data => {
             setTitle("")
             setFile(null)
             fileRef.current.value = ""
+            window.location.reload()
         })
         .catch(err => {
             e.preventDefault()
-            alert(err)
+            console.log(err)
         })
 
     }

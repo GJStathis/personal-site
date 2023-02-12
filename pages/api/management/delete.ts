@@ -1,9 +1,10 @@
 import { deleteBlog } from '../../../lib/database/blog'
 import { simpleErrorChecking } from '../../../lib/utils'
-import { getSession } from "next-auth/react"
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "../auth/[...nextauth]"
 
 export default async function handler(req, res) {
-    const session = await getSession({ req })
+    const session = await getServerSession(req, res, authOptions)
 
     if(session && session.user.isAdmin) {
 

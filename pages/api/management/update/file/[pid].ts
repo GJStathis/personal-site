@@ -1,10 +1,11 @@
 import { update } from '../../../../../lib/database/blog'
 import { connectToDB } from '../../../../../lib/database/dbConnect'
 import { simpleErrorChecking } from '../../../../../lib/utils'
-import { getSession } from "next-auth/react"
 import multer from 'multer'
 import path from 'path'
 import fs from 'fs'
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "../../../auth/[...nextauth]"
 
 export const config = {
     api: {
@@ -29,7 +30,7 @@ const upload = multer({
 })
 
 export default async function handler(req, res) {
-    const session = await getSession({ req })
+    const session = await getServerSession(req, res, authOptions)
 
     if(session && session.user.isAdmin) {
         connectToDB()

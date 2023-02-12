@@ -1,0 +1,42 @@
+/* .navBar {
+    position: relative;
+}
+
+.navBarButton {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.navMenu {
+    overflow-y: scroll;
+    list-style: none;
+    position: fixed;
+    background: darkcyan;
+    left: 0;
+    height: 100vh;
+    width: 0;
+    overflow: hidden;
+    max-width: 290px;
+    z-index: 9;
+    margin: 0;
+}
+
+.navOpen{
+    width: 100%;
+}
+
+.navMenu a {
+    display: block;
+    padding: 10px 40px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.navMenu li:first-child {
+    margin-top: 3rem;
+}
+ */

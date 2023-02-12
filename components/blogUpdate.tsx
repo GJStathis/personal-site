@@ -4,7 +4,7 @@ import styles from '../styles/BlogUpdate.module.css'
 import globalStyles from '../styles/GlobalDesign.module.css'
 
 function BlogUpdate(props) {
-    const [updateType, setUpdateType] = useState("")
+    const [updateType, setUpdateType] = useState("file")
     const [selected, setSelected] = useState("")
     const [file, setFile] = useState("")
     const [text, setText] = useState("")
@@ -25,10 +25,10 @@ function BlogUpdate(props) {
         formData.append("updateType", updateType)
 
         if(updateType == 'file') {
-            url = `api/management/update/file/${selected._id}`
+            url = `/api/management/update/file/${selected._id}`
             formData.append("content", file)
         } else {
-            url = `api/management/update/inline/${selected._id}`
+            url = `/api/management/update/inline/${selected._id}`
             formData.append("content", text)
         }
 
