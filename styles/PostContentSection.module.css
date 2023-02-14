@@ -1,0 +1,11 @@
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    padding-bottom: 10px;
+}
+
+.shortbreak {
+    width: 25%;
+    margin: 0;
+}

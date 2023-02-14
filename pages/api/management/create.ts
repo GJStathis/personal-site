@@ -51,6 +51,7 @@ export default async function handler(req, res) {
 
         res.status(200).send({})
     } else {
+        console.log("A call was made to the create route and failed")
         res.send({error: "You do not have permissison to access this route"})
     }
 }

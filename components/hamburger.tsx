@@ -34,13 +34,13 @@ function HamburgerMenu() {
                 <div className={`${styles.navMenu} ${navbarOpen ? styles.navOpen : styles.navClosed}`}>
                     <ul className={styles.navList}>
                         <li>
-                            <Link href='/'>Home</Link>
+                            <Link href='/' onClick={() => setNavbarOpen(!navbarOpen)}>Home</Link>
                         </li>
                         <li>
-                            <Link href='/blog'>Blog</Link>
+                            <Link href='/blog' onClick={() => setNavbarOpen(!navbarOpen)}>Blog</Link>
                         </li>
                         <li>
-                            <Link href='/projects'>Projects</Link>
+                            <Link href='/projects' onClick={() => setNavbarOpen(!navbarOpen)}>Projects</Link>
                         </li>
                     </ul>
                 </div>

@@ -15,7 +15,7 @@ export const config = {
 
 const upload = multer({
     storage: multer.diskStorage({
-        destination: "../../../../../public/uploads",
+        destination: "../../../../public/uploads",
         filename: function(req, file, cb) {
             cb(null, file.fieldname + '-' + Date.now())
         }
@@ -55,6 +55,7 @@ export default async function handler(req, res) {
 
         simpleErrorChecking(status, res)
     } else {
+        console.log("A call was made to the file update route and failed")
         res.send({error: "You do not have permissison to access this route"})
     }
 }

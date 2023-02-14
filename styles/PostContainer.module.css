@@ -1,0 +1,15 @@
+.container {
+    padding: 50px;
+}
+
+.postTitle {
+    color: grey;
+    font-size: 48px;
+}
+
+@media screen and (max-width: 480px) {
+    .postTitle {
+        color: grey;
+        font-size: 38px;
+    }
+}

@@ -18,18 +18,18 @@
     max-width: 225px;
     z-index: 9;
     margin: 0;
+    background: #FAF9F6;
 }
 
 .navClosed {
     width: 0;
     overflow: hidden;
-    transition: ease width 1s; 
+    transition: ease width .5s; 
 }
 
 .navOpen{
     width: 100%;
-    background: #FAF9F6;
-    transition: ease width .75s;
+    transition: ease width .5s;
 }
 
 .navList {

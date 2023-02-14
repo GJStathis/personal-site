@@ -38,6 +38,7 @@ export default async function handler(req, res) {
         
         simpleErrorChecking(status, res)
     } else {
+        console.log("A call was made to the inline update route and failed")
         res.send({error: "You do not have permissison to access this route"})
     }
 }
