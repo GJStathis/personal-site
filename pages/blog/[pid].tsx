@@ -1,12 +1,9 @@
 import { getDateFromDateime } from "../../lib/utils"
 import styles from "../../styles/BlogPost.module.css"
 import { Archivo } from '@next/font/google'
-
-interface postData {
-    title: string;
-    content: string;
-    publish_date: string
-}
+import { BlogPostData, BlogDBModel } from '../../lib/interfaces/global_interfaces'
+import { connectToDB } from '../../lib/database/dbConnect'
+import { BlogModel } from '../../lib/database/models'
 
 const archivo = Archivo({
     weight: '200',
@@ -27,11 +24,11 @@ export default function BlogPost({ data }) {
 
     return(
         <div className={styles.postContainer}>
-            <h1 className={styles.postTitle + ' ' + archivoWeighted.className}>{data.title}</h1>
+            <h1 className={styles.postTitle + ' ' + archivoWeighted.className}>{data?.title}</h1>
             <hr />
-            <h4 className={archivoBold.className}>Published: {getDateFromDateime(data.publish_date)}</h4>
+            <h4 className={archivoBold.className}>Published: {getDateFromDateime(data?.publish_date)}</h4>
             <div className={styles.textContentDiv + ' ' + archivo.className}>
-                {data.content}
+                {data?.content}
             </div>
         </div>
     )
@@ -40,20 +37,24 @@ export default function BlogPost({ data }) {
 
 export async function getStaticProps(context) {
     const { params } = context
-    const data = await fetch(`${process.env.API_URL}/api/posts/${params.pid}`)
-    const post: postData = await data.json()
-
+    connectToDB()
+    const post: BlogPostData = await BlogModel.findById(params.pid).exec()
     return {
         props: {
-            data: post
+            data: JSON.parse(JSON.stringify(post))
         },
         revalidate: 30,
     }
 }
 
 export async function getStaticPaths() {
+    connectToDB()
+    const data: Array<BlogDBModel> = await BlogModel.find({}).exec()
+    const blogPaths = JSON.parse(JSON.stringify(data)).map( (blog: BlogDBModel) => ({
+        params: { id: blog._id, pid: blog._id}
+    }))
     return {
-        paths: [],
+        paths: blogPaths,
         fallback: true
     }
 }

@@ -2,6 +2,9 @@ import BlogCard from "../../components/blogCard"
 import styles from "../../styles/BlogList.module.css"
 import Link from 'next/link'
 import { getDateFromDateime } from "../../lib/utils"
+import { connectToDB } from '../../lib/database/dbConnect'
+import { BlogModel } from '../../lib/database/models'
+import { BlogDBModel } from '../../lib/interfaces/global_interfaces'
 
 export default function Blog({ posts }) {
     return(
@@ -9,7 +12,7 @@ export default function Blog({ posts }) {
             <div className={styles.blogListContainer}>
                 <h2>Posts</h2>
                 {
-                    posts.map( (post, index) => {
+                    posts.map( (post: BlogDBModel, index) => {
                         return(
                             <Link href={`/blog/${post._id}`} key={index} passHref legacyBehavior>
                                 <BlogCard title={post.title}>
@@ -25,12 +28,11 @@ export default function Blog({ posts }) {
 }
 
 export async function getStaticProps() {
-    const response = await fetch(`${process.env.API_URL}/api/posts`)
-    const data = await response.json()
-
+    connectToDB()
+    const data: Array<BlogDBModel> = await BlogModel.find({}).exec()
     return {
         props: {
-            posts: data
+            posts: JSON.parse(JSON.stringify(data))
         },
         revalidate: 30,
     }

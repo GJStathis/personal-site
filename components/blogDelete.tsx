@@ -1,10 +1,11 @@
 import {useState} from 'react'
-import BlogSelect from './BlogSelect'
+import BlogSelect from './blogSelect'
 import styles from '../styles/BlogUpdate.module.css'
 import globalStyles from '../styles/GlobalDesign.module.css'
+import { BlogDBModel } from '../lib/interfaces/global_interfaces'
 
 function BlogDelete(props) {
-    const [selected, setSelected] = useState({})
+    const [selected, setSelected] = useState<BlogDBModel | null>(null)
 
     function deleteSelected() {
         console.log(`Deleting the following object ${selected._id}`)
@@ -28,7 +29,7 @@ function BlogDelete(props) {
             alert("Please select a post to delete")
         }
 
-        setSelected({})
+        setSelected(null)
     }
 
     return(

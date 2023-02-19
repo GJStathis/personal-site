@@ -3,10 +3,10 @@ import styles from '../styles/BlogCreate.module.css'
 import globalStyles from '../styles/GlobalDesign.module.css'
 
 function BlogCreate() {
-    const [title, setTitle] = useState("")
-    const [file, setFile] = useState("")
+    const [title, setTitle] = useState<string>("")
+    const [file, setFile] = useState<File | null>(null)
 
-    const fileRef = useRef()
+    const fileRef = useRef<HTMLInputElement>()
     const url = "/api/management/create"
 
     const submitForm = (e) => {

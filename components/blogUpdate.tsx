@@ -1,17 +1,18 @@
 import {useState, useEffect} from 'react'
-import BlogSelect from './BlogSelect'
+import BlogSelect from './blogSelect'
 import styles from '../styles/BlogUpdate.module.css'
 import globalStyles from '../styles/GlobalDesign.module.css'
+import { BlogDBModel } from '../lib/interfaces/global_interfaces'
 
 function BlogUpdate(props) {
-    const [updateType, setUpdateType] = useState("file")
-    const [selected, setSelected] = useState("")
-    const [file, setFile] = useState("")
-    const [text, setText] = useState("")
-    const [title, setTitle] = useState("")
+    const [updateType, setUpdateType] = useState<string>("file")
+    const [selected, setSelected] = useState<BlogDBModel | null>(null)
+    const [file, setFile] = useState<File | null>(null)
+    const [text, setText] = useState<string>("")
+    const [title, setTitle] = useState<string>("")
 
     useEffect( () => {
-        setFile("")
+        setFile(null)
         setTitle(selected.title)
         setText(selected.content)
     }, [selected])
@@ -71,7 +72,7 @@ function BlogUpdate(props) {
 
                                 <div className={styles.inputElement}>
                                     <label htmlFor='content'>Content</label>
-                                    { updateType == 'inline' && <textarea name="content" form="updateForm" value={text} cols="100" rows="50" onChange={(e) => setText(e.target.value)}/>}
+                                    { updateType == 'inline' && <textarea name="content" form="updateForm" value={text} cols={100} rows={50} onChange={(e) => setText(e.target.value)}/>}
                                     { updateType == 'file' && <input type='file' name='content' onChange={(e) => setFile(e.target.files[0])}/> }
                                 </div>
 
