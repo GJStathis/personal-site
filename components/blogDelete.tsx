@@ -38,7 +38,7 @@ function BlogDelete(props) {
                 <BlogSelect data={props.data} handler={setSelected}/>
             </div>
             <div className={styles.row}>
-                <p>Selected Blog: {selected.title}</p>
+                <p>Selected Blog: {selected?.title}</p>
                 <button className={globalStyles.buttonGeneral} onClick={() => deleteSelected()}>Delete</button>
             </div>
         </div>

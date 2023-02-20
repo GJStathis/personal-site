@@ -12,9 +12,11 @@ function BlogUpdate(props) {
     const [title, setTitle] = useState<string>("")
 
     useEffect( () => {
-        setFile(null)
-        setTitle(selected.title)
-        setText(selected.content)
+        if(selected) {
+            setFile(null)
+            setTitle(selected.title)
+            setText(selected.content)
+        }
     }, [selected])
 
     function submitFormData(e) {
