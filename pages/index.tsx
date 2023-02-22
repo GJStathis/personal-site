@@ -1,5 +1,6 @@
 import Navbar from '../components/navbar'
 import styles from '../styles/Home.module.css'
+import Head from 'next/head';
 import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons'
 import { faSquareEnvelope, faFilePdf } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,6 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export default function Home() {
   return (
     <div className={styles.container}>
+      <Head>
+          <title>Gregory J Stathis</title>
+      </Head>
       <div className={styles.contentContainer}>
         <div className={styles.contentTitle}>
           <h1 className={styles.title}>Nice to meet you my name is Greg</h1>
